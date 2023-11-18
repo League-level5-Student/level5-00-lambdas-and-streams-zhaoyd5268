@@ -121,8 +121,9 @@ public class Minesweeper extends PApplet {
 	 * number of 1s, i.e. mines
 	 */
 	void setNumberOfSurroundingMines() {
-		List <Cell> g = cells;
-		g.stream().forEach((Cell) -> getNeighbors(Cell).stream().filter((mine) -> Cell.mine = false).mapToInt((mine) -> mine.cellColor = 1).sum());
+		cells.stream().forEach((cell) -> cell.minesAround = getNeighbors(cell).stream().mapToInt((m)-> {
+			return m.mine ? 1:0;
+		}).sum());
 	}
 
 	@Override
